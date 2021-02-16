@@ -10,8 +10,10 @@ commands:
     description: Send to Global Chat
     permission: TPUChat.GlobalChat
     usage: "Usage: /<command>"
+    aliases:
+      - g
 permissions:
   TPUChat.ReloadTabCommand:
     default: op
   TPUChat.GlobalChat:
-    default: not op
+    default: true
