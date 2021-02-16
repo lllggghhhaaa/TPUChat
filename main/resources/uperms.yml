@@ -1,0 +1,5 @@
+groups:
+  defalt:
+    TPUChat.ReloadTabCommand: false
+  Admin:
+    TPUChat.ReloadTabCommand: true

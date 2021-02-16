@@ -1,0 +1,4 @@
+GroupsColors:
+  Member: "&f"
+Message: "%groupcolor%[%group%] §f%player% » %message%"
+DistanceLocalChat: 150

@@ -1,0 +1,17 @@
+main: "lg.Core"
+name: "TPUChat"
+version: "0.0.1-SNAPSHOT"
+commands:
+  reloadplayerstab:
+    description: Reload Tabs Nickname
+    permission: TPUChat.ReloadTabCommand
+    usage: "Usage: /<command>"
+  global:
+    description: Send to Global Chat
+    permission: TPUChat.GlobalChat
+    usage: "Usage: /<command>"
+permissions:
+  TPUChat.ReloadTabCommand:
+    default: op
+  TPUChat.GlobalChat:
+    default: not op
