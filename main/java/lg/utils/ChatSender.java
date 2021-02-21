@@ -116,7 +116,9 @@ public class ChatSender
 
         for (Player p : Bukkit.getOnlinePlayers())
         {
-            p.sendMessage(ChatColor.DARK_RED + "[S] " + ChatColor.GRAY + finalMessage);
+            if(p.hasPermission("TPUChat.StaffChat")) {
+                p.sendMessage(ChatColor.DARK_RED + "[S] " + ChatColor.GRAY + finalMessage);
+            }
         }
     }
 
