@@ -55,7 +55,7 @@ public class ChatSender
                 }
                 if(playersList.isEmpty())
                 {
-                    sender.sendMessage(finalMessage);
+                    sender.sendMessage(ChatColor.YELLOW + "[L] " + ChatColor.GRAY + finalMessage);
                     sender.sendMessage(ChatColor.YELLOW + "Nenhum jogador próximo :(");
                 }
                 else {
@@ -90,7 +90,54 @@ public class ChatSender
 
         for (Player p : Bukkit.getOnlinePlayers())
         {
-            p.sendMessage(finalMessage);
+            p.sendMessage(ChatColor.DARK_GRAY + "[G] " + ChatColor.GRAY + finalMessage);
         }
+    }
+
+    public void sendToStaffChat(Player sender, String message)
+    {
+        String finalMessage = plugin.getConfig().getString("Message");
+        if(plugin.getConfig().getString("GroupsColors." + Core.getChat().getPrimaryGroup(sender)) != null)
+        {
+            finalMessage = finalMessage.replace("%groupcolor%", plugin.getConfig().getString("GroupsColors." + Core.getChat().getPrimaryGroup(sender)));
+            finalMessage = ChatColor.translateAlternateColorCodes('&', finalMessage);
+        }
+        else {
+            finalMessage = finalMessage.replace("%groupcolor%", "");
+        }
+        if(finalMessage.replace("%group%", Core.getChat().getPrimaryGroup(sender)) != null) {
+            finalMessage = finalMessage.replace("%group%", Core.getChat().getPrimaryGroup(sender));
+        }else {
+            finalMessage = finalMessage.replace("%group%", "");
+        }
+        finalMessage = finalMessage.replace("%player%", sender.getDisplayName());
+        finalMessage = finalMessage.replace("%message%", message);
+        finalMessage = ChatColor.translateAlternateColorCodes('&', finalMessage);
+
+        for (Player p : Bukkit.getOnlinePlayers())
+        {
+            p.sendMessage(ChatColor.DARK_RED + "[S] " + ChatColor.GRAY + finalMessage);
+        }
+    }
+
+    public void sendToTellChat(Player sender, Player receiver, String message) {
+        String finalMessage = plugin.getConfig().getString("Message");
+        if (plugin.getConfig().getString("GroupsColors." + Core.getChat().getPrimaryGroup(sender)) != null) {
+            finalMessage = finalMessage.replace("%groupcolor%", plugin.getConfig().getString("GroupsColors." + Core.getChat().getPrimaryGroup(sender)));
+            finalMessage = ChatColor.translateAlternateColorCodes('&', finalMessage);
+        } else {
+            finalMessage = finalMessage.replace("%groupcolor%", "");
+        }
+        if (finalMessage.replace("%group%", Core.getChat().getPrimaryGroup(sender)) != null) {
+            finalMessage = finalMessage.replace("%group%", Core.getChat().getPrimaryGroup(sender));
+        } else {
+            finalMessage = finalMessage.replace("%group%", "");
+        }
+        finalMessage = finalMessage.replace("%player%", sender.getDisplayName());
+        finalMessage = finalMessage.replace("%message%", message);
+        finalMessage = ChatColor.translateAlternateColorCodes('&', finalMessage);
+
+        sender.sendMessage(ChatColor.WHITE + "[T] " + ChatColor.GRAY + finalMessage);
+        receiver.sendMessage(ChatColor.WHITE + "[T] " + ChatColor.GRAY + finalMessage);
     }
 }

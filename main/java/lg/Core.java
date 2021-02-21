@@ -17,10 +17,11 @@ public class Core extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        LoadConfiguration();
         setupChat();
         RegisterEvents();
         RegisterCommands();
-        LoadConfiguration();
+
     }
 
     public void LoadConfiguration()
@@ -32,7 +33,10 @@ public class Core extends JavaPlugin {
     public void RegisterEvents()
     {
         PluginManager pm = Bukkit.getPluginManager();
-        pm.registerEvents(new PlayerChat(this), this);
+        if(getConfig().getBoolean("ChatEnabled"))
+        {
+            pm.registerEvents(new PlayerChat(this), this);
+        }
         pm.registerEvents(new PlayerJoin(this), this);
         pm.registerEvents(new PlayerExit(this), this);
     }
@@ -40,7 +44,9 @@ public class Core extends JavaPlugin {
     public void RegisterCommands()
     {
         getCommand("reloadplayerstab").setExecutor(new ReloadPlayers(this));
-        getCommand("global").setExecutor(new GlobalChat(this));
+        if(getConfig().getBoolean("ChatEnabled")) {
+            getCommand("global").setExecutor(new GlobalChat(this));
+        }
     }
 
     private boolean setupChat() {

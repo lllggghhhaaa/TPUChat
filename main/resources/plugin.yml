@@ -12,8 +12,24 @@ commands:
     usage: "Usage: /<command>"
     aliases:
       - g
+  staffchat:
+    description: Send to Staff Chat
+    permission: TPUChat.StaffChat
+    usage: "Usage: /<command>"
+    aliases:
+      - s
+  tellchat:
+    description: Send to Direct Player
+    permission: TPUChat.TellChat
+    usage: "Usage: /<command>"
+    aliases:
+      - t
 permissions:
   TPUChat.ReloadTabCommand:
     default: op
   TPUChat.GlobalChat:
     default: true
+  TPUChat.TellChat:
+    default: true
+  TPUChat.StaffChat:
+    default: op

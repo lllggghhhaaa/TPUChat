@@ -1,4 +1,5 @@
 GroupsColors:
   Member: "&f"
+ChatEnabled: true
 Message: "%groupcolor%[%group%] §f%player% » %message%"
 DistanceLocalChat: 150

@@ -17,7 +17,9 @@ public class PlayerChat implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event)
     {
-        new ChatSender(plugin).sendToLocaleChat(event.getPlayer(), event.getMessage());
-        event.setCancelled(true);
+        if(plugin.getConfig().getBoolean("ChatEnabled")) {
+            new ChatSender(plugin).sendToLocaleChat(event.getPlayer(), event.getMessage());
+            event.setCancelled(true);
+        }
     }
 }
