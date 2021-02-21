@@ -2,6 +2,8 @@ package lg;
 
 import lg.commands.GlobalChat;
 import lg.commands.ReloadPlayers;
+import lg.commands.StaffChat;
+import lg.commands.TellChat;
 import lg.events.PlayerChat;
 import lg.events.PlayerExit;
 import lg.events.PlayerJoin;
@@ -44,6 +46,8 @@ public class Core extends JavaPlugin {
     public void RegisterCommands()
     {
         getCommand("reloadplayerstab").setExecutor(new ReloadPlayers(this));
+        getCommand("tell").setExecutor(new TellChat(this));
+        getCommand("staffchat").setExecutor(new StaffChat(this));
         if(getConfig().getBoolean("ChatEnabled")) {
             getCommand("global").setExecutor(new GlobalChat(this));
         }

@@ -18,7 +18,7 @@ commands:
     usage: "Usage: /<command>"
     aliases:
       - s
-  tellchat:
+  tell:
     description: Send to Direct Player
     permission: TPUChat.TellChat
     usage: "Usage: /<command>"
