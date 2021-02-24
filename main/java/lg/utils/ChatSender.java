@@ -69,7 +69,7 @@ public class ChatSender
                     sender.sendMessage(ChatColor.YELLOW + "Nenhum jogador próximo :(");
                 }
                 else {
-                    for (Player p : playersList) {g
+                    for (Player p : playersList) {
                         sender.sendMessage(finalMessage);
                         p.sendMessage(finalMessage);
                     }
