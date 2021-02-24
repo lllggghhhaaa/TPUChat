@@ -28,6 +28,8 @@ public class ChatSender
             public void run() {
                 List<Entity> nearbyE = sender.getNearbyEntities(distanceLocalChat, distanceLocalChat, distanceLocalChat);
 
+                ClanUtils clanUtils = new ClanUtils(plugin);
+
                 String finalMessage = plugin.getConfig().getString("Message");
                 if(plugin.getConfig().getString("GroupsColors." + Core.getChat().getPrimaryGroup(sender)) != null)
                 {
@@ -53,9 +55,17 @@ public class ChatSender
                         playersList.add((Player) p);
                     }
                 }
+
+                String clanPrefix = "";
+
+                if(clanUtils.getClan(sender) != null)
+                {
+                    clanPrefix = "[" + clanUtils.getClan(sender) + "] ";
+                }
+
                 if(playersList.isEmpty())
                 {
-                    sender.sendMessage(ChatColor.YELLOW + "[L] " + ChatColor.GRAY + finalMessage);
+                    sender.sendMessage(ChatColor.YELLOW + "[L] " + ChatColor.GRAY + clanPrefix + finalMessage);
                     sender.sendMessage(ChatColor.YELLOW + "Nenhum jogador próximo :(");
                 }
                 else {
@@ -70,6 +80,8 @@ public class ChatSender
 
     public void sendToGlobalChat(Player sender, String message)
     {
+        ClanUtils clanUtils = new ClanUtils(plugin);
+
         String finalMessage = plugin.getConfig().getString("Message");
         if(plugin.getConfig().getString("GroupsColors." + Core.getChat().getPrimaryGroup(sender)) != null)
         {
@@ -88,9 +100,16 @@ public class ChatSender
         finalMessage = finalMessage.replace("%message%", message);
         finalMessage = ChatColor.translateAlternateColorCodes('&', finalMessage);
 
+        String clanPrefix = "";
+
+        if(clanUtils.getClan(sender) != null)
+        {
+            clanPrefix = "[" + clanUtils.getClan(sender) + "] ";
+        }
+
         for (Player p : Bukkit.getOnlinePlayers())
         {
-            p.sendMessage(ChatColor.DARK_GRAY + "[G] " + ChatColor.GRAY + finalMessage);
+            p.sendMessage(ChatColor.DARK_GRAY + "[G] " + ChatColor.GRAY + clanPrefix + finalMessage);
         }
     }
 

@@ -1,21 +1,24 @@
 package lg;
 
-import lg.commands.GlobalChat;
-import lg.commands.ReloadPlayers;
-import lg.commands.StaffChat;
-import lg.commands.TellChat;
+import lg.commands.*;
 import lg.events.PlayerChat;
 import lg.events.PlayerExit;
 import lg.events.PlayerJoin;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+
 public class Core extends JavaPlugin {
 
     private static Chat chat = null;
+    public File clanData;
+    public FileConfiguration clanConfig;
 
     @Override
     public void onEnable() {
@@ -23,13 +26,21 @@ public class Core extends JavaPlugin {
         setupChat();
         RegisterEvents();
         RegisterCommands();
-
     }
 
     public void LoadConfiguration()
     {
         getConfig().options().copyDefaults(false);
         saveDefaultConfig();
+
+        clanData = new File(getDataFolder() + File.separator + "clan.yml");
+        if(!clanData.exists())
+        {
+            try {
+                clanData.createNewFile();
+            }catch (Exception err) { }
+        }
+        clanConfig = YamlConfiguration.loadConfiguration(clanData);
     }
 
     public void RegisterEvents()
@@ -48,6 +59,7 @@ public class Core extends JavaPlugin {
         getCommand("reloadplayerstab").setExecutor(new ReloadPlayers(this));
         getCommand("tell").setExecutor(new TellChat(this));
         getCommand("staffchat").setExecutor(new StaffChat(this));
+        getCommand("clan").setExecutor(new EntryClan(this));
         if(getConfig().getBoolean("ChatEnabled")) {
             getCommand("global").setExecutor(new GlobalChat(this));
         }

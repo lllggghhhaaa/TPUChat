@@ -24,6 +24,10 @@ commands:
     usage: "Usage: /<command>"
     aliases:
       - t
+  clan:
+    description: Clan System
+    permission: TPUChat.Clans
+    usage: "Usage: /<command> [entry|exit]"
 permissions:
   TPUChat.ReloadTabCommand:
     default: op
@@ -33,3 +37,5 @@ permissions:
     default: true
   TPUChat.StaffChat:
     default: op
+  TPUChat.Clans:
+    default: true
