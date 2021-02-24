@@ -60,7 +60,7 @@ public class ChatSender
 
                 if(clanUtils.getClan(sender) != null)
                 {
-                    clanPrefix = "[" + clanUtils.getClan(sender) + "] ";
+                    clanPrefix = "[" + clanUtils.getClan(sender) + ChatColor.GRAY + "] ";
                 }
 
                 if(playersList.isEmpty())
@@ -69,7 +69,7 @@ public class ChatSender
                     sender.sendMessage(ChatColor.YELLOW + "Nenhum jogador próximo :(");
                 }
                 else {
-                    for (Player p : playersList) {
+                    for (Player p : playersList) {g
                         sender.sendMessage(finalMessage);
                         p.sendMessage(finalMessage);
                     }
@@ -104,7 +104,7 @@ public class ChatSender
 
         if(clanUtils.getClan(sender) != null)
         {
-            clanPrefix = "[" + clanUtils.getClan(sender) + "] ";
+            clanPrefix = "[" + clanUtils.getClan(sender) + ChatColor.GRAY + "] ";
         }
 
         for (Player p : Bukkit.getOnlinePlayers())
